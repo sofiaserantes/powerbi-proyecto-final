@@ -1,0 +1,23 @@
+DEFINE
+    MEASURE 'FactMarketing'[Total Clics] = SUM ( FactMarketing[Σ Rendimiento: Clics] )
+    MEASURE 'FactMarketing'[Total Impresiones] = SUM ( FactMarketing[Σ Rendimiento: Impresiones] )
+    MEASURE 'FactMarketing'[Total Gasto] = SUM ( FactMarketing[Σ Coste: Importe gastado] )
+    MEASURE 'FactMarketing'[Total Conversiones] = SUM ( FactMarketing[Σ Rendimiento: Conversiones] )
+    MEASURE 'FactMarketing'[Total Valor Conversiones] = SUM ( FactMarketing[Σ Conversiones: Valor total de conversiones] )
+    MEASURE 'FactMarketing'[CTR (%)] = DIVIDE ( [Total Clics], [Total Impresiones] )
+    MEASURE 'FactMarketing'[CPC (€ por clic)] = DIVIDE ( [Total Gasto], [Total Clics] )
+    MEASURE 'FactMarketing'[CPM (€ por mil impresiones)] = DIVIDE ( [Total Gasto] * 1000, [Total Impresiones] )
+    MEASURE 'FactMarketing'[CPA (€ por conversión)] = DIVIDE ( [Total Gasto], [Total Conversiones] )
+
+EVALUATE
+    SUMMARIZECOLUMNS(
+        "Total Clics", [Total Clics],
+        "Total Impresiones", [Total Impresiones],
+        "Total Gasto", [Total Gasto],
+        "Total Conversiones", [Total Conversiones],
+        "Total Valor Conversiones", [Total Valor Conversiones],
+        "CTR (%)", [CTR (%)],
+        "CPC (€ por clic)", [CPC (€ por clic)],
+        "CPM (€ por mil impresiones)", [CPM (€ por mil impresiones)],
+        "CPA (€ por conversión)", [CPA (€ por conversión)]
+    )
